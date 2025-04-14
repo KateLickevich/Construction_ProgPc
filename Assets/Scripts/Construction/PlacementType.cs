@@ -4,6 +4,6 @@
         {
                 None = 0,
                 Horizontal = 1,
-                Wall = 2
+                Vertical = 2
         }
 }

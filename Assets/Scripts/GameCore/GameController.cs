@@ -19,6 +19,7 @@ namespace GameCore
             _gameModeController.SetGameMode(GameModeType.Game);
             
             _placementController.OnGrab += EnterConstructionMode;
+            _placementController.OnPlace += ExitConstructionMode;
         }
 
         private void Update()
@@ -34,10 +35,14 @@ namespace GameCore
             }
         }
 
-        private void EnterConstructionMode(Transform placementObject)
+        private void EnterConstructionMode()
         {
             _gameModeController.SetGameMode(GameModeType.Construction);
-            _playerController.TakePlacedObject(placementObject);
+        }
+
+        private void ExitConstructionMode()
+        {
+            _gameModeController.SetGameMode(GameModeType.Game);
         }
     }
 }

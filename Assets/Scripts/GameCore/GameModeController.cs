@@ -18,7 +18,6 @@ namespace GameCore
                     Cursor.lockState = CursorLockMode.Locked;
                     break;
                 case GameModeType.Construction:
-                    Cursor.lockState = CursorLockMode.Confined;
                     break;
             }
         }

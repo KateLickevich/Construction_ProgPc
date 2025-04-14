@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 8702446973879342680}
   - component: {fileID: 1158552991170105982}
   - component: {fileID: 7928019662470538076}
-  m_Layer: 0
+  - component: {fileID: 3590803307401417606}
+  m_Layer: 8
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,10 +48,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cf64a81f1c849df872698cc8b5bde2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _placementType: 1
+  _placementType: 2
+  _validLayers:
+    serializedVersion: 2
+    m_Bits: 64
   _meshRenderer: {fileID: 1158552991170105982}
-  _possiblePlacementColor: {r: 0, g: 1, b: 0.06293082, a: 0}
-  _impossiblePlacementColor: {r: 1, g: 0, b: 0, a: 0}
+  _collider: {fileID: 7928019662470538076}
+  _validColor: {r: 0.105882354, g: 1, b: 0, a: 0}
+  _invalidColor: {r: 1, g: 0, b: 0, a: 0}
   _enterConstructionAlphaValue: 0.5
 --- !u!33 &8702446973879342680
 MeshFilter:
@@ -126,3 +131,30 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &3590803307401417606
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2163580180024228761}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
