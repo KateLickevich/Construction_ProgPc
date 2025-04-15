@@ -10,6 +10,7 @@ namespace Construction
         public Action OnPlace;
         
         [Header("FIND PLACEMENT OBJECT")]
+        [SerializeField] private LayerMask _grabObjectsLayers;
         [SerializeField] private float _findDistance = 5f;
         [SerializeField] private UIController _uiController;
         [Header("PLACEMENT SETTINGS")]
@@ -38,7 +39,7 @@ namespace Construction
             _uiController.HideGripPointer();
             
             Debug.DrawRay(_ray.origin, _ray.direction * _findDistance, Color.red);
-            if (Physics.Raycast(_ray, out RaycastHit hit, _findDistance))
+            if (Physics.Raycast(_ray, out RaycastHit hit, _findDistance, _grabObjectsLayers))
             {
                 if (hit.collider.gameObject.TryGetComponent(out IActivateConstruction obj))
                 {
@@ -58,6 +59,7 @@ namespace Construction
 
         public void TryPlacementObject()
         {
+            _uiController.HideGripPointer();
             RotatePlacedObject();
             _ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             
@@ -79,10 +81,12 @@ namespace Construction
                     
                     _currentPlacedObject.transform.position = hit.point + offset;
                     _currentPlacedObject.SetValidColor();
-                    
-                    if (Input.GetMouseButtonDown(1))
+
+                    if (!_currentPlacedObject.IsCollision)
                     {
-                        if (!_currentPlacedObject.IsCollision)
+                        _uiController.ShowGripPointer();
+
+                        if (Input.GetMouseButtonDown(1))
                         {
                             Placement();
                         }
