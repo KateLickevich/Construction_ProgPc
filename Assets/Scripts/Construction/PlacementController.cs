@@ -45,7 +45,7 @@ namespace Construction
             {
                 if (hit.collider.gameObject.TryGetComponent(out IActivateConstruction obj))
                 {
-                    if (Input.GetMouseButtonDown(1))
+                    if (Input.GetMouseButtonDown(0))
                     {
                         _currentPlacedObject = obj as PlacedObject;
                         _defaultPositionPlacedObject = _currentPlacedObject.transform.position;
@@ -76,7 +76,7 @@ namespace Construction
                     switch (_currentPlacedObject.PlacementType)
                     {
                         case PlacementType.Horizontal:
-                            offset = Vector3.up * _currentPlacedObject.Size.y / 2;
+                            offset = Vector3.up * _currentPlacedObject.Size.y / 2f;
                             break;
                         case PlacementType.Vertical:
                             offset = hit.normal * (_currentPlacedObject.Size.z / 2f);
@@ -90,7 +90,7 @@ namespace Construction
                     {
                         _uiController.ShowGripPointer();
 
-                        if (Input.GetMouseButtonDown(1))
+                        if (Input.GetMouseButtonDown(0))
                         {
                             Placement();
                         }
@@ -106,7 +106,7 @@ namespace Construction
                 SetDefaultPositionPlaceObject();
             }
 
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(1))
             {
                 _currentPlacedObject.transform.SetPositionAndRotation(_defaultPositionPlacedObject, Quaternion.Euler(_defaultRotationPlacedObject));
                 Placement();
