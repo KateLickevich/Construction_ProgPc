@@ -38,11 +38,13 @@ namespace GameCore
         private void EnterConstructionMode()
         {
             _gameModeController.SetGameMode(GameModeType.Construction);
+            _uiController.ShowReturnObject();
         }
 
         private void ExitConstructionMode()
         {
             _gameModeController.SetGameMode(GameModeType.Game);
+            _uiController.HideReturnObject();
         }
     }
 }

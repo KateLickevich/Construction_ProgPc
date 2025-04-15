@@ -20,6 +20,8 @@ namespace Construction
         [SerializeField] private LayerMask _ignorePlaceLayer;
         
         private PlacedObject _currentPlacedObject;
+        private Vector3 _defaultPositionPlacedObject;
+        private Vector3 _defaultRotationPlacedObject;
         private Ray _ray;
         private float _targetPlacedObjectRotationY = 0f;
 
@@ -46,6 +48,8 @@ namespace Construction
                     if (Input.GetMouseButtonDown(1))
                     {
                         _currentPlacedObject = obj as PlacedObject;
+                        _defaultPositionPlacedObject = _currentPlacedObject.transform.position;
+                        _defaultRotationPlacedObject = _currentPlacedObject.transform.rotation.eulerAngles;
                         obj.EnterConstruction();
                         OnGrab?.Invoke();
                     }
@@ -101,6 +105,12 @@ namespace Construction
             {
                 SetDefaultPositionPlaceObject();
             }
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                _currentPlacedObject.transform.SetPositionAndRotation(_defaultPositionPlacedObject, Quaternion.Euler(_defaultRotationPlacedObject));
+                Placement();
+            }
         }
 
         private void SetDefaultPositionPlaceObject()
@@ -130,7 +140,6 @@ namespace Construction
         
         public void Placement()
         {
-            _currentPlacedObject.transform.SetParent(null);
             _currentPlacedObject.ExitConstruction();
             _currentPlacedObject = null;
             OnPlace?.Invoke();
